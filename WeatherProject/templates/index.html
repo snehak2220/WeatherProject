@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>weather app</title>
+    <link rel="stylesheet" href="{% static 'css/weather.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="app" ><h1>Weather App</h1>
+</div>
+
+<div class="search" >
+      <form method="post">
+        {% csrf_token %}
+        <input placeholder="Search..." type="text" name="city" style="width:500px;margin-left:500px;margin-top:20px;">
+        <button type="submit" style="margin-top:20px;">Go</button>
+      </form>
+</div>
+{% if temp and city_name and country_code and humidity and wind_speed and description %}
+<div id="weather_wrapper">
+	<div class="weatherCard">
+		<div class="currentTemp">
+			<span class="temp">{{temp}}</span>
+			<span class="temp">{{description}}</span>
+			<span class="location">{{city_name}}  :  {{country_code}}</span>
+		</div>
+		<div class="currentWeather">
+			<span class="conditions"><img src="http://openweathermap.org/img/w/{{icon}}.png" alt="icon" style="width:130px;"></span>
+			<div class="info">
+				<span class="rain" style="margin-top:5px;padding-top:8px;">{{humidity}}</span>
+				<span class="wind">{{wind_speed}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+</body>
+</html>

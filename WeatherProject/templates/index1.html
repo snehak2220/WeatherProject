@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>weather app</title>
+    <link rel="stylesheet" href="{% static 'css/weather.css' %}">
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="app" ><h1>weather app</h1>
+</div>
+
+<div class="search">
+      <form method="post">
+        {% csrf_token %}
+        <input placeholder="Search..." type="text" name="city">
+        <button type="submit">Go</button>
+      </form>
+</div>
+
+  {% if country_code and coordinate and temp and pressure and humidity %}
+
+            <p>country code : {{country_code}}</p><br>
+            <p>coordinate : {{coordinate}}</p><br>
+            <p>temp : {{temp}}</p><br>
+            <p>pressure : {{pressure}} </p><br>
+            <p>humidity : {{humidity}}</p><br>
+            <p>Description : {{description}}</p><br>
+            <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="icon" style="width:70px;">
+    {% endif %}
+
+
+
+</body>
+</html>
